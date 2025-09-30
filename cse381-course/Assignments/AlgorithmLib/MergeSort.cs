@@ -6,7 +6,7 @@
 */
 
 namespace AlgorithmLib;
-
+ 
 public static class MergeSort
 {
     /* Use Merge Sort to sort a list of values in place
@@ -34,8 +34,22 @@ public static class MergeSort
      */
     public static void _Sort<T>(List<T> data, int first, int last) where T : IComparable<T>
     {
+        //base case, clears the rest of the code below to execute cleanly
+        if (first >= last)
+        {
+            return;
+        }
+        //see what I mean? this would throw an exception if the list was empty. bad math
+        //oh, it also finds the middle index
+        int mid = (first + last) / 2;
+        //sorts the left  half of the list
+        _Sort(data, first, mid);
+        //sorts the right half
+        _Sort(data, mid + 1, last);
+        //merges the two halves. not sure why this works, cause we're recursively calling a function that in itself doesn't sort, but whatever it works
+        Merge(data, first, mid, last);
     }
-    
+
     /* Merge two sorted list which are adjacent to each other back into
      * the same list.
      *
@@ -49,6 +63,46 @@ public static class MergeSort
      */
     public static void Merge<T>(List<T> data, int first, int mid, int last) where T : IComparable<T>
     {
+        //self explanatory temp list to hold our stuff in
+        List<T> temp = new List<T>();
+        //for making the code not ugly, this is the index of the left side of the list
+        int left = first;
+        //similar purpose, though its more justified. now i dont have to type mid+1 to represent this elsewhere
+        int right = mid + 1;
+
+        //where the actual merge sorting happens
+        //while the left and right sides of the lists aren't exhausted yet, do this
+        while (left <= mid && right <= last)
+        {
+            //compare adjacent values
+            if (data[left].CompareTo(data[right]) <= 0)
+            {
+                temp.Add(data[left]);
+                left++;
+            }
+            else
+            {
+                temp.Add(data[right]);
+                right++;
+            }
+        }
+        //just in case the left or right side finish up first, so we copy the remaining values into the list
+        while (left <= mid)
+        {
+            temp.Add(data[left]);
+            left++;
+        }
+        while (right <= last)
+        {
+            temp.Add(data[right]);
+            right++;
+        }
+
+        //bring it all back into the og list
+        for (int i = 0; i < temp.Count; i++)
+        {
+            data[first + i] = temp[i];
+        }
     }
 }
 
