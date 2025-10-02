@@ -70,32 +70,46 @@ public static class MergeSort
         //similar purpose, though its more justified. now i dont have to type mid+1 to represent this elsewhere
         int right = mid + 1;
 
+        //total number of elements between first and last (inclusive)
+        int total = last - first + 1;
+
         //where the actual merge sorting happens
-        //while the left and right sides of the lists aren't exhausted yet, do this
-        while (left <= mid && right <= last)
+        //instead of 3 while loops, we’ll just run one for loop this many times,
+        //checking which side still has elements left to grab from
+        for (int i = 0; i < total; i++)
         {
-            //compare adjacent values
-            if (data[left].CompareTo(data[right]) <= 0)
+            //Case 1: both halves still have elements left to compare
+            if (left <= mid && right <= last)
+            {
+                //compare adjacent values, take whichever is smaller
+                if (data[left].CompareTo(data[right]) <= 0)
+                {
+                    temp.Add(data[left]);
+                    left++;
+                }
+                else
+                {
+                    temp.Add(data[right]);
+                    right++;
+                }
+            }
+            //Case 2: only the left side has stuff left
+            else if (left <= mid)
             {
                 temp.Add(data[left]);
                 left++;
             }
-            else
+            //Case 3: only the right side has stuff left
+            else if (right <= last)
             {
                 temp.Add(data[right]);
                 right++;
             }
-        }
-        //just in case the left or right side finish up first, so we copy the remaining values into the list
-        while (left <= mid)
-        {
-            temp.Add(data[left]);
-            left++;
-        }
-        while (right <= last)
-        {
-            temp.Add(data[right]);
-            right++;
+            //Case 4: both sides exhausted (shouldn’t really happen because of total count, but safe)
+            else
+            {
+                break;
+            }
         }
 
         //bring it all back into the og list
