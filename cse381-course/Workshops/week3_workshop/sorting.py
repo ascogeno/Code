@@ -48,6 +48,12 @@ book_list = requests.get(book_url).json()
 
 # Do your sorting here
 
+Sort(book_list, key  = lambda x : x["author"])
+Sort(book_list, key  = lambda x : x["title"])
+Sort(book_list, key  = lambda x : x["language"])
+Sort(book_list, key  = lambda x : x["year"])
+Sort(book_list, key  = lambda x : (x["year"], x["author"]))
+Sort(book_list, key  = lambda x : len(x["title"]))
 
 
 
