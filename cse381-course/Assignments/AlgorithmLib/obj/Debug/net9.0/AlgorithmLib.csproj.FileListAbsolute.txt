@@ -21,3 +21,4 @@ D:\Code\cse381-course\Assignments\AlgorithmLib\obj\Debug\net9.0\AlgorithmLib.dll
 D:\Code\cse381-course\Assignments\AlgorithmLib\obj\Debug\net9.0\refint\AlgorithmLib.dll
 D:\Code\cse381-course\Assignments\AlgorithmLib\obj\Debug\net9.0\AlgorithmLib.pdb
 D:\Code\cse381-course\Assignments\AlgorithmLib\obj\Debug\net9.0\ref\AlgorithmLib.dll
+C:\Code\cse381-course\Assignments\AlgorithmLib\obj\Debug\net9.0\AlgorithmLib.sourcelink.json

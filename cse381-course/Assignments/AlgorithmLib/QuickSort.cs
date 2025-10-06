@@ -4,6 +4,8 @@
  *
 *  Instructions: Refer to W04 Prove: Assignment in Canvas for detailed instructions.
  */
+using System.Runtime.InteropServices;
+
 namespace AlgorithmLib;
 
 public static class QuickSort
@@ -22,7 +24,7 @@ public static class QuickSort
         // Start the recursion with the entire list
         _Sort(data, 0, data.Count-1);
     }
-    
+
     /* Recursively use quick sort to sort a sublist
      * defined by first and last.
      *
@@ -35,6 +37,12 @@ public static class QuickSort
      */
     public static void _Sort<T>(List<T> data, int first, int last) where T : IComparable<T>
     {
+        if (first >= last) return;
+
+        var pivot = Partition(data, first, last);
+        _Sort(data, first, pivot - 1);
+        _Sort(data, pivot + 1, last);
+
     }
     
     /* Partition a sublist by finding where a pivot belongs when sorted.  All
@@ -52,6 +60,28 @@ public static class QuickSort
      */
     public static int Partition<T>(List<T> data, int first, int last) where T : IComparable<T>
     {
-        return 0;
+        var lmpg = first;
+        var Randy = new Random();
+        var pivot = Randy.Next(first, last);//make this random between this range
+        var tempy = data[pivot];
+        data[pivot] = data[last];
+        data[last] = tempy;
+        //swap data[pivot] and data[last]
+        for (int i = first; i <= last; i++)
+        {
+            if (data[i].CompareTo(data[last]) <= 0) //if data[i] <= data[last]
+            {
+                var temp = data[i];
+                data[i] = data[last];
+                data[last] = temp;
+                //swap data[i] and data [last]
+                lmpg++;
+            }
+        }
+        var superTemp = data[lmpg];
+        data[lmpg] = data[last];
+        data[last] = superTemp;
+        //swap data[lmgp] and data[last]
+        return lmpg;
     }
 }
