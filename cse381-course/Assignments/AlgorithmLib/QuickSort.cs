@@ -4,6 +4,7 @@
  *
 *  Instructions: Refer to W04 Prove: Assignment in Canvas for detailed instructions.
  */
+using System.Net.WebSockets;
 using System.Runtime.InteropServices;
 
 namespace AlgorithmLib;
@@ -59,28 +60,23 @@ public static class QuickSort
      *     The index of where the pivot was moved
      */
     public static int Partition<T>(List<T> data, int first, int last) where T : IComparable<T>
-    {
-        var lmpg = first;
-        var Randy = new Random();
-        var pivot = Randy.Next(first, last);//make this random between this range
-        var tempy = data[pivot];
-        data[pivot] = data[last];
-        data[last] = tempy;
-        //swap data[pivot] and data[last]
-        for (int i = first; i <= last; i++)
+    { 
+        int pivot = last;
+        T pivotValue = data[pivot];
+        (data[pivot], data[last]) = (data[last], data[pivot]);
+
+        int lmpg = first;
+
+        for (int i = first; i < last; i++)
         {
-            if (data[i].CompareTo(data[last]) <= 0) //if data[i] <= data[last]
+            if (data[i].CompareTo(pivotValue) <= 0) //if data[i] <= data[last]
             {
-                var temp = data[i];
-                data[i] = data[last];
-                data[last] = temp;
+                (data[i], data[lmpg]) = (data[lmpg], data[i]);
                 //swap data[i] and data [last]
                 lmpg++;
             }
         }
-        var superTemp = data[lmpg];
-        data[lmpg] = data[last];
-        data[last] = superTemp;
+        (data[lmpg], data[last]) = (data[last], data[lmpg]);
         //swap data[lmgp] and data[last]
         return lmpg;
     }
