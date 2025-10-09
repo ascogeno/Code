@@ -4,6 +4,9 @@
  *
 *  Instructions: Refer to W04 Prove: Assignment in Canvas for detailed instructions.
  */
+using System.Net.WebSockets;
+using System.Runtime.InteropServices;
+
 namespace AlgorithmLib;
 
 public static class QuickSort
@@ -22,7 +25,7 @@ public static class QuickSort
         // Start the recursion with the entire list
         _Sort(data, 0, data.Count-1);
     }
-    
+
     /* Recursively use quick sort to sort a sublist
      * defined by first and last.
      *
@@ -35,6 +38,12 @@ public static class QuickSort
      */
     public static void _Sort<T>(List<T> data, int first, int last) where T : IComparable<T>
     {
+        if (first >= last) return;
+
+        var pivot = Partition(data, first, last);
+        _Sort(data, first, pivot - 1);
+        _Sort(data, pivot + 1, last);
+
     }
     
     /* Partition a sublist by finding where a pivot belongs when sorted.  All
@@ -51,7 +60,24 @@ public static class QuickSort
      *     The index of where the pivot was moved
      */
     public static int Partition<T>(List<T> data, int first, int last) where T : IComparable<T>
-    {
-        return 0;
+    { 
+        int pivot = last;
+        T pivotValue = data[pivot];
+        (data[pivot], data[last]) = (data[last], data[pivot]);
+
+        int lmpg = first;
+
+        for (int i = first; i < last; i++)
+        {
+            if (data[i].CompareTo(pivotValue) <= 0) //if data[i] <= data[last]
+            {
+                (data[i], data[lmpg]) = (data[lmpg], data[i]);
+                //swap data[i] and data [last]
+                lmpg++;
+            }
+        }
+        (data[lmpg], data[last]) = (data[last], data[lmpg]);
+        //swap data[lmgp] and data[last]
+        return lmpg;
     }
 }
