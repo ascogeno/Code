@@ -22,21 +22,21 @@ while True:
     selection_sort(win, data[:])
     time.sleep(5)
 
-    # pygame.display.set_caption("Insertion Sort")
-    # insertion_sort(win, data[:])
-    # time.sleep(5)
+    pygame.display.set_caption("Insertion Sort")
+    insertion_sort(win, data[:])
+    time.sleep(5)
 
-    # pygame.display.set_caption("Merge Sort")
-    # merge_sort(win, data[:])
-    # time.sleep(5)
+    pygame.display.set_caption("Merge Sort")
+    merge_sort(win, data[:])
+    time.sleep(5)
 
-    # pygame.display.set_caption("Quick Sort")
-    # quick_sort(win, data[:])
-    # pygame.time.delay(5000)
+    pygame.display.set_caption("Quick Sort")
+    quick_sort(win, data[:])
+    pygame.time.delay(5000)
 
-    # pygame.display.set_caption("Counting Sort")
-    # counting_sort(win, data[:], 500)
-    # time.sleep(5)
+    pygame.display.set_caption("Counting Sort")
+    counting_sort(win, data[:], 500)
+    time.sleep(5)
 
 
 
