@@ -14,8 +14,9 @@ def selection_sort(win, data):
         for compare in range(start + 1, len(data)):
             if data[compare] < data[smallest]:
                 smallest = compare
+                draw_data(win, data,highlight=smallest)
         data[start], data[smallest] = data[smallest], data[start]
-    draw_data(win, data)
+    # draw_data(win, data)
 
 ##################################
 # INSERTION SORT
@@ -28,8 +29,9 @@ def insertion_sort(win, data):
         while insert > -1 and data[insert] > item:
             data[insert+1] = data[insert]
             insert -= 1
+            draw_data(win, data, highlight=insert)
         data[insert+1] = item
-    draw_data(win,data)
+    #draw_data(win,data)
 
 ##################################
 # MERGE SORT
@@ -37,7 +39,7 @@ def insertion_sort(win, data):
 
 def merge_sort(win, data):
     _merge_sort(win, data, 0, len(data)-1)
-    draw_data(win, data)
+    #draw_data(win, data)
 
 def _merge_sort(win, data, first, last):
     if first >= last: 
@@ -56,15 +58,19 @@ def merge(win, data, first, mid, last):
         if sa1Index >= len(sa1):
             data[mIndex] = sa2[sa2Index]
             sa2Index += 1
+            draw_data(win,data,highlight=mIndex)
         elif sa2Index >= len(sa2):
             data[mIndex] = sa1[sa1Index]
             sa1Index += 1
+            draw_data(win,data,highlight=mIndex)
         elif sa1[sa1Index] <= sa2[sa2Index]:
             data[mIndex] = sa1[sa1Index]
             sa1Index += 1
+            draw_data(win,data,highlight=mIndex)
         else:
             data[mIndex] = sa2[sa2Index]
             sa2Index += 1
+            draw_data(win,data,highlight=mIndex)
 
 ##################################
 # QUICK SORT
@@ -72,7 +78,7 @@ def merge(win, data, first, mid, last):
 
 def quick_sort(win, data):
     _quick_sort(win, data, 0, len(data)-1)
-    draw_data(win, data)
+    #draw_data(win, data)
 
 def _quick_sort(win, data, first, last):
     if first >= last: 
@@ -89,6 +95,7 @@ def partition(win, data, first, last):
         if data[index] <= data[last]:
             data[leftMostGreaterPivot], data[index] = data[index], data[leftMostGreaterPivot]
             leftMostGreaterPivot += 1
+            draw_data(win, data, highlight=leftMostGreaterPivot)
 
     data[leftMostGreaterPivot], data[last] = data[last], data[leftMostGreaterPivot]
     return leftMostGreaterPivot 
@@ -104,7 +111,8 @@ def counting_sort(win, data, rangeData):
     for x in data:
         sorted[order[x]] = x
         order[x] += 1
-    draw_data(win, sorted)
+        draw_data(win,data,highlight=order[x])
+    #draw_data(win, sorted)
     return sorted
 
 def create_equals(data, rangeData):
