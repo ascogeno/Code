@@ -24,43 +24,45 @@
 # Please test your code to see if it works.
 
 defmodule FunctionalQueue do
-  @moduledoc """
-  A purely functional queue implemented using two lists: {front, rear}.
-  """
-
-  # Create an empty queue
+  # check if queue is empty
   def empty({[], []}), do: true
   def empty(_), do: false
 
-  # Enqueue an element to the rear
+  # enqueue an element to the rear
   def enqueue({[], []}, element), do: {[element], []}
   def enqueue({front, rear}, element), do: {front, [element | rear]}
 
-  # Dequeue an element from the front
+  # dequeue an element from the front
   def dequeue({[], []}), do: {[], []}
-  def dequeue({[head | []], rear}), do: {Enum.reverse(rear), []}
+  def dequeue({[_ | []], rear}), do: {Enum.reverse(rear), []}
   def dequeue({[_ | tail], rear}), do: {tail, rear}
 
-  # Head: Get the first element without removing
+  # head: Get the first element without removing it
   def head({[], []}), do: nil
   def head({[], rear}), do: List.last(rear)
   def head({[h | _], _}), do: h
 
-  # Tail: Get the last element without removing
+  # tail: Get the last element without removing it
   def tail({[], []}), do: nil
   def tail({[last], []}), do: last
   def tail({_, [h | _]}), do: h
 
-  # Convert queue to list
+  # convert queue to list
   def to_list({front, rear}), do: front ++ Enum.reverse(rear)
 
-  # Convert list to queue
+  # convert list to queue
   def from_list([]), do: {[], []}
   def from_list(list) when is_list(list), do: {list, []}
 
-  # Optional: Reverse the queue
-  def reverse({front, rear}), do: {Enum.reverse(rear), Enum.reverse(front)}
+  # reverse the queue
+  # this one was interesting, as I had no idea how to do it. this weird syntax below is the AI fix, and uh i'm not totally sure what it does but it passed the tests so im sure it's fine?
+  def reverse(queue) do
+    queue
+    |> to_list()
+    |> Enum.reverse()
+    |> from_list()
+  end
 
-  # Optional: Get length of queue
+  # get the length of the queue
   def length({front, rear}), do: Kernel.length(front) + Kernel.length(rear)
 end
