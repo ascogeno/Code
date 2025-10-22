@@ -24,6 +24,33 @@ public static class DijkstraShortestPath
      */
     public static (List<int>, List<int>) ShortestPath(Graph g, int startVertex)
     {
-        return (new List<int>(), new List<int>());
+        List<int> dist = Enumerable.Repeat(Graph.INF, g.Size()).ToList();
+        List<int> predecessor = Enumerable.Repeat(Graph.INF, g.Size()).ToList();
+        //fix these to be ints intstead
+        dist[startVertex] = 0;
+        predecessor[startVertex] = Graph.INF;
+        List<int> unvisited = Enumerable.Range(0, g.Size()).ToList();
+
+        while (unvisited.Count() > 0)
+        {
+            int vertex = unvisited.OrderBy(v => dist[v]).First();
+            if (dist[vertex] == Graph.INF)
+            {
+                break; 
+            }
+                
+
+            unvisited.Remove(vertex);
+
+            foreach (var edge in g.Edges(vertex))
+            {
+                if (dist[vertex] + edge.Weight < dist[edge.DestId])
+                {
+                    dist[edge.DestId] = dist[vertex] + edge.Weight;
+                    predecessor[edge.DestId] = vertex;
+                }
+            }
+        }
+        return (dist, predecessor);
     } 
 }
