@@ -15,14 +15,15 @@
 
 defmodule RedBlack do
   @type color :: :red | :black
-  @type node :: {color, any(), tree(), tree()}
-  @type tree :: node() | nil
+  @type rbt_node :: {color, any(), tree(), tree()}
+  @type tree :: rbt_node | nil
 
-  # 1. Check if the tree is empty
+  # empty feeling (checks for empty trees)
+  # i guess i could have made a deforestry joke
   def empty(nil), do: true
   def empty(_), do: false
 
-  # 2. Check if a value is in the tree
+  # cheque cashing. checking for values
   def contains(nil, _val), do: false
   def contains({_, value, left, right}, val) do
     cond do
@@ -32,12 +33,13 @@ defmodule RedBlack do
     end
   end
 
-  # 3. Add a value to the tree
+  # an additional function
   def add(tree, val) do
     {_, v, l, r} = add_helper(tree, val)
     {:black, v, l, r}
   end
 
+  # helper functions n such. this is where most of the magic is. and I say magic, this was vibe-coded all day
   defp add_helper(nil, val), do: {:red, val, nil, nil}
   defp add_helper({color, value, left, right}, val) do
     if val < value do
@@ -63,7 +65,7 @@ defmodule RedBlack do
   end
   defp balance_right(node), do: node
 
-  # 4. Remove a value from the tree (simplified, no rebalancing)
+  # removing stuff? funny the competensee wants this, but the dipper didn't ask about this function
   def remove(nil, _val), do: nil
   def remove({color, value, left, right}, val) do
     cond do
@@ -85,22 +87,22 @@ defmodule RedBlack do
     {color, min_val, left, new_right}
   end
 
-  # 5. Get the minimum value
+  # also not something the dipper asked for. weird how the competensee is more thorough than the dipper
   def min(nil), do: nil
   def min({_, value, nil, _}), do: value
   def min({_, _, left, _}), do: min(left)
 
-  # 6. Get the maximum value
+  # max galactica
   def max(nil), do: nil
   def max({_, value, _, nil}), do: value
   def max({_, _, _, right}), do: max(right)
 
-  # 7. Convert the tree to a sorted list
+  # want the tree in a list? i don't but the competensee does
   def toList(nil), do: []
   def toList({_, value, left, right}) do
     toList(left) ++ [value] ++ toList(right)
   end
 
-  # 8. Create a tree from a list
+  # want a tree from a list? i certainly might but the compentensee does
   def fromList(list), do: Enum.reduce(list, nil, fn x, acc -> add(acc, x) end)
 end
