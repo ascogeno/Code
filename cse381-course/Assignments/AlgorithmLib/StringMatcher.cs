@@ -20,9 +20,29 @@ public static class StringMatcher
      *  Outputs:
      *     list of indices where the pattern matched (last char of pattern match)
      */
-    public static List<int> MatchPattern(string text,  string pattern, List<char> inputs)
+    public static List<int> MatchPattern(string text, string pattern, List<char> inputs)
     {
-        return new List<int>();
+        List<Dictionary<char, int>> fsm = BuildFSM(pattern, inputs);
+        List<int> results = new List<int>();
+        int state = 0;
+
+        // Walk through each character in the text
+        for (int i = 0; i < text.Length; i++)
+        {
+            char c = text[i];
+
+            // If the FSM does not define a transition for this input, reset
+            if (!fsm[state].ContainsKey(c))
+                state = 0;
+            else
+                state = fsm[state][c];
+
+            // If we reached the full pattern length, record a match
+            if (state == pattern.Length)
+                results.Add(i);
+        }
+
+        return results;
     }
 
     /* Build the Finite State Machine table for the pattern and list of valid
@@ -39,6 +59,62 @@ public static class StringMatcher
      */
     public static List<Dictionary<char, int>> BuildFSM(string pattern, List<char> inputs)
     {
-        return new List<Dictionary<char, int>>();
+        int m = pattern.Length;
+        List<Dictionary<char, int>> fsm = new List<Dictionary<char, int>>(m + 1);
+
+        // Initialize each state with an empty transition table
+        for (int i = 0; i <= m; i++)
+            fsm.Add(new Dictionary<char, int>());
+
+        // Build transitions for each state q
+        for (int q = 0; q <= m; q++)
+        {
+            // Try all possible input characters
+            foreach (char a in inputs)
+            {
+                int nextState = 0;
+
+                // Try largest possible prefix length down to nada
+                for (int k = Math.Min(m, q + 1); k >= 0; k--)
+                {
+                    bool ok = true;
+
+                    // Check last character of prefix vs input char
+                    if (k > 0 && pattern[k - 1] != a)
+                        ok = false;
+
+                    // Check previous characters if prefix length is greater than 1
+                    if (ok && k > 1)
+                    {
+                        if (q < k - 1)
+                            ok = false;
+                        else
+                        {
+                            // Compare prefix with suffix of pattern
+                            for (int j = 0; j < k - 1; j++)
+                            {
+                                if (pattern[j] != pattern[q - (k - 1) + j])
+                                {
+                                    ok = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    // Use the first (longest) valid k
+                    if (ok)
+                    {
+                        nextState = k;
+                        break;
+                    }
+                }
+
+                // Store computed transition
+                fsm[q][a] = nextState;
+            }
+        }
+
+        return fsm;
     }
 }
