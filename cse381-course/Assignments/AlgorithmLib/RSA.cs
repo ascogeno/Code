@@ -22,7 +22,7 @@ public class RSA
      */
     public static (BigInteger, BigInteger, BigInteger) Euclid(BigInteger a, BigInteger b)
     {
-        return (0,0,0);
+        return (0, 0, 0);
     }
 
     /* Recursively calculates x^y mod n
@@ -36,7 +36,9 @@ public class RSA
      */
     public static BigInteger ModularExponentiation(BigInteger x, BigInteger y, BigInteger n)
     {
-        return 0;
+        var z = ModularExponentiation(x, (y - 1) / 2, n); //fix?
+
+        return (z * z * x) % n;
     }
 
     /* Generate the RSA private key given the two prime numbers p and q and
@@ -50,9 +52,13 @@ public class RSA
      *  Outputs:
      *     Private Key - Must be positive
      */
-    public static BigInteger GeneratePrivateKey(BigInteger p, BigInteger q, BigInteger e) 
+    public static BigInteger GeneratePrivateKey(BigInteger p, BigInteger q, BigInteger e)
     {
-        return 0;
+        var phi = (p - 1) * (q - 1);
+        (gcd, i, _) = Euclid(e, phi); //fix
+
+
+        return ((in % phi) +phi); //fix
     }
 
     /* Encrypt a value using the public keys e and n
@@ -66,7 +72,7 @@ public class RSA
      */
     public static BigInteger Encrypt(BigInteger value, BigInteger e, BigInteger n)
     {
-        return 0;
+        return ModularExponentiation(value, e, n);
     }
 
     /* Decrypt a value using the public key n and private key d
@@ -80,7 +86,7 @@ public class RSA
      */
     public static BigInteger Decrypt(BigInteger value, BigInteger d, BigInteger n)
     {
-        return 0;
+        return ModularExponentiation(value, d, n);
     }
 
 

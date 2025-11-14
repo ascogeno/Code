@@ -1003,11 +1003,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Code\\cse381-course\\Assignments\\AlgorithmLibTest\\AlgorithmLibTest.csproj",
+      "projectUniqueName": "C:\\Code\\cse381-course\\Assignments\\AlgorithmLibTest\\AlgorithmLibTest.csproj",
       "projectName": "AlgorithmLibTest",
-      "projectPath": "D:\\Code\\cse381-course\\Assignments\\AlgorithmLibTest\\AlgorithmLibTest.csproj",
+      "projectPath": "C:\\Code\\cse381-course\\Assignments\\AlgorithmLibTest\\AlgorithmLibTest.csproj",
       "packagesPath": "C:\\Users\\rosen\\.nuget\\packages\\",
-      "outputPath": "D:\\Code\\cse381-course\\Assignments\\AlgorithmLibTest\\obj\\",
+      "outputPath": "C:\\Code\\cse381-course\\Assignments\\AlgorithmLibTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\rosen\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1022,8 +1022,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\Code\\cse381-course\\Assignments\\AlgorithmLib\\AlgorithmLib.csproj": {
-              "projectPath": "D:\\Code\\cse381-course\\Assignments\\AlgorithmLib\\AlgorithmLib.csproj"
+            "C:\\Code\\cse381-course\\Assignments\\AlgorithmLib\\AlgorithmLib.csproj": {
+              "projectPath": "C:\\Code\\cse381-course\\Assignments\\AlgorithmLib\\AlgorithmLib.csproj"
             }
           }
         }
