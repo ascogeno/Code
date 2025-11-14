@@ -6,6 +6,7 @@
 */
 
 using System.Numerics;
+using System.Threading.Tasks.Dataflow;
 
 namespace AlgorithmLib;
 
@@ -22,7 +23,20 @@ public class RSA
      */
     public static (BigInteger, BigInteger, BigInteger) Euclid(BigInteger a, BigInteger b)
     {
-        return (0, 0, 0);
+        //base case
+        if (b == 0)
+        {
+            return (a, 1, 0);
+        }
+
+        //recursive call
+        var (gcd, i1, j1) = Euclid(b, a % b);
+
+        //im not totally sure, im just following what the book said and then Chat corrected
+        BigInteger i = j1;
+        BigInteger j = i1 - (a / b) * j1;
+
+        return (gcd, i, j);
     }
 
     /* Recursively calculates x^y mod n
@@ -36,9 +50,23 @@ public class RSA
      */
     public static BigInteger ModularExponentiation(BigInteger x, BigInteger y, BigInteger n)
     {
-        var z = ModularExponentiation(x, (y - 1) / 2, n); //fix?
+        //base case. should always have one
+        if (y == 0)
+        {
+            return 1;
+        }
 
-        return (z * z * x) % n;
+        // if y is even
+        if (y % 2 == 0)
+        {
+            var z = ModularExponentiation(x, y / 2, n);
+            return (z * z) % n;
+        }
+        else
+        {
+            var z = ModularExponentiation(x, (y - 1) / 2, n);
+            return (z * z * x) % n;
+        }
     }
 
     /* Generate the RSA private key given the two prime numbers p and q and
@@ -54,11 +82,17 @@ public class RSA
      */
     public static BigInteger GeneratePrivateKey(BigInteger p, BigInteger q, BigInteger e)
     {
-        var phi = (p - 1) * (q - 1);
-        (gcd, i, _) = Euclid(e, phi); //fix
+        var phi = (p - 1) * (q - 1); //stole from class
+        var (_, d, _) = Euclid(e, phi); //idk, i had i in here but chat said to do d instead
 
+        //make sure key is positive. i guess. idk, another chat suggestion. might remove
+        d %= phi;
+        if (d < 0)
+        {
+            d += phi;
+        }
 
-        return ((in % phi) +phi); //fix
+        return d;
     }
 
     /* Encrypt a value using the public keys e and n
