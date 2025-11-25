@@ -1,18 +1,21 @@
+# Write a lazy function that generates an infinite stream of random numbers within a given range. Test it by fetching 5 random numbers, one at a time.
+
+# Please test your code to see if it works.
+
 defmodule Lazy do
-  @moduledoc """
-  Documentation for `Lazy`.
-  """
+  def start_stream(min, max) do
+    spawn(fn -> loop(min, max) end)
+  end
 
-  @doc """
-  Hello world.
+  defp loop(min, max) do
+    receive do
+      {:get, requester} ->
+        number = :rand.uniform(max - min + 1) + min - 1
+        send(requester, {:random_number, number})
+        loop(min, max)
 
-  ## Examples
-
-      iex> Lazy.hello()
-      :world
-
-  """
-  def hello do
-    :world
+      :stop ->
+        :ok
+    end
   end
 end
