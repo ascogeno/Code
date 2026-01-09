@@ -6,21 +6,23 @@ A simple program that makes a small window pop up with the phrase "Hello world!"
 
 Steps to build and/or run the software:
 
-1. Open the python file in your IDE of choice
-2. In the case of VS Code, run the python file
-3. In the case of other IDE's, still try to run the file but I don't know where your button to do that will be so I can't help you tons there
+(These steps assume you are using VS Code. For other IDEs, follow along with their equivalent functions and features)
+
+1. Open the folder which contains the python file within VS Code
+2. Open and view the python file
+3. In the top right corner of the screen, click the arrow-shaped run button
 
 Instructions for using the software:
 
-1. Run the python file inside an IDE
-2. Not sure what should be a step 2 here
+1. Run the python file within VS Code
+2. Close the program one you feel properly greeted
 
 ## Development Environment
 
 To recreate the development environment, you need the following software and/or libraries with the specified versions:
 
-- Python (latest version)
-- VS Code (other IDEs will work, but I'm assuming VS Code)
+- Python 3.14.2
+- VS Code
 - Have the python extension installed via the "Extensions" tab.
 
 ## Useful Websites to Learn More
