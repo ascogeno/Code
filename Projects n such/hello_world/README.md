@@ -1,41 +1,39 @@
 # Project Title (Update)
 
-Add a description of your project here.
+A simple program that makes a small window pop up with the phrase "Hello world!"
 
 ## Instructions for Build and Use
 
 Steps to build and/or run the software:
 
-1. First step here
-2.
-3.
+1. Open the python file in your IDE of choice
+2. In the case of VS Code, run the python file
+3. In the case of other IDE's, still try to run the file but I don't know where your button to do that will be so I can't help you tons there
 
 Instructions for using the software:
 
-1. First step here
-2.
-3.
+1. Run the python file inside an IDE
+2. Not sure what should be a step 2 here
 
 ## Development Environment
 
 To recreate the development environment, you need the following software and/or libraries with the specified versions:
 
-- First thing here
--
--
+- Python (latest version)
+- VS Code (other IDEs will work, but I'm assuming VS Code)
+- Have the python extension installed via the "Extensions" tab.
 
 ## Useful Websites to Learn More
 
 I found these websites useful in developing this software:
 
-- [Website Title](Link)
--
--
+- [ChatGPT](https://chatgpt.com/)
+- [Python](https://www.python.org/)
 
 ## Future Work
 
 The following items I plan to fix, improve, and/or add to this project in the future:
 
-- [ ] First thing here
-- [ ]
-- [ ]
+- [ ] I want to make the displayed text larger
+- [ ] I want to see if the favicon can be changed too, the default is a feather
+- [ ] Maybe add flare, like the text appearing one character at a time in time with sound effects. Not because the program would actually be benefitted from this, but because I want to practice
