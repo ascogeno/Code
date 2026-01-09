@@ -1,4 +1,4 @@
-# Project Title (Update)
+# Pop-up Hello World Program
 
 A simple program that makes a small window pop up with the phrase "Hello world!"
 
